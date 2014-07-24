@@ -18,7 +18,6 @@
 . /etc/init.d/functions
 
 RETVAL=0
-PIDFILE=/var/run/nswl.pid
 
 prog=nswl
 exec=/usr/local/netscaler/bin/nswl
@@ -29,8 +28,8 @@ if [ -f /etc/sysconfig/$prog ] ; then
     . /etc/sysconfig/$prog
 fi
 
-NSWL_CONFIG=${NSWL_CONFIG:-/usr/local/netscaler/etc/nswl.conf}
-NSWL_OPTIONS=${NSWL_OPTIONS:-''}
+NSWL_CONFIG=${NSWL_CONFIG:-/etc/nswl/nswl.conf}
+NSWL_OPTIONS=${NSWL_OPTIONS:-'-d 0'}
 
 start() {
     [ -x $exec ] || exit 5
@@ -39,7 +38,7 @@ start() {
     umask 077
 
     echo -n $"Starting nswl: "
-    daemon --pidfile="$PIDFILE" $exec -start -f $NSWL_CONFIG $NSWL_OPTIONS
+    daemon "$exec -start -f $NSWL_CONFIG $NSWL_OPTIONS 1>/dev/null 2>&1 &"
     RETVAL=$?
     echo
     [ $RETVAL -eq 0 ] && touch $lockfile
@@ -47,14 +46,14 @@ start() {
 }
 stop() {
     echo -n $"Shutting down nswl: "
-    killproc -p "$PIDFILE" $exec
+    killproc $exec
     RETVAL=$?
     echo
     [ $RETVAL -eq 0 ] && rm -f $lockfile
     return $RETVAL
 }
 rhstatus() {
-    status -p "$PIDFILE" -l $prog $exec
+    status -l $prog $exec
 }
 restart() {
     stop

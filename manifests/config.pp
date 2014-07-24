@@ -33,15 +33,6 @@ class nswl::config {
     mode   => '0644'
   }
 
-  # Sysconfig
-  file { '/etc/sysconfig/nswl':
-    ensure => present,
-    owner  => 'root',
-    group  => 'root',
-    mode   => '0644',
-    source => "puppet:///modules/${module_name}/etc/sysconfig/nswl"
-  }
-
   file { '/etc/nswl/nswl.conf':
     tag     => "nswl_config_${::fqdn}",
     owner   => 'root',
