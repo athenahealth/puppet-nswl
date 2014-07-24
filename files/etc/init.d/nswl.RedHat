@@ -38,6 +38,7 @@ start() {
     umask 077
 
     echo -n $"Starting nswl: "
+    cd /var/log
     daemon "$exec -start -f $NSWL_CONFIG $NSWL_OPTIONS 1>/dev/null 2>&1 &"
     RETVAL=$?
     echo
