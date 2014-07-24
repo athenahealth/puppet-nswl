@@ -37,7 +37,7 @@ class nswl::config {
     tag     => "nswl_config_${::fqdn}",
     owner   => 'root',
     group   => 'root',
-    mode    => '0644',
+    mode    => '0600',
     notify  => Service['nswl'],
     require => File['/etc/nswl/']
   }
