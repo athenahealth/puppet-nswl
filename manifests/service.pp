@@ -24,7 +24,7 @@
 #
 # === Authors
 #
-# * Richard Pijnenburg <mailto:richard@ispavailability.com>
+# * Stas Alekseev <mailto:stas.alekseev@gnail.com>
 #
 class nswl::service {
 

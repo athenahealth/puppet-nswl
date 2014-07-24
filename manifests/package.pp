@@ -20,13 +20,11 @@
 #
 # === Authors
 #
-# * Richard Pijnenburg <mailto:richard@ispavailability.com>
+# * Stas Alekseev <mailto:stas.alekseev@gnail.com>
 #
 class nswl::package {
 
   #### Package management
-
-  include python
 
   # set params: in operation
   if $nswl::ensure == 'present' {
@@ -54,8 +52,6 @@ class nswl::package {
   # action
   package { $nswl::params::package:
     ensure   => $package_ensure,
-    provider => 'pip',
-    require  => Class['python'],
   }
 
 }

@@ -51,35 +51,11 @@
 #   String to set the specific version you want to install.
 #   Defaults to <tt>false</tt>.
 #
-# [*format*]
-#   format to transfer in
-#   Value can be any of: "json", "repack", "string"
-#   Default value: "json"
-#   This variable is optional
-#
-# [*respawn_delay*]
-#   Delay for respawning the output thread
-#   Value type is number
-#   Default value: 3
-#   This variable is optional
-#
-# [*max_failure*]
-#   Number of times the respawn of an output thread is done
-#   Value type is number
-#   Default value: 7
-#   This variable is optional
-#
 # [*hostname*]
 #   Name to use in the @source_host variable.
 #   Value type is string
 #   Default value: FQDN
 #   This variable is optional
-#
-# [*transport(]
-#  Transport method to use
-#  Value can be any of: "redis", "rabbitmq", "zeromq", "udp"
-#  Default value: "redis"
-#  This variable is optional
 #
 # The default values for the parameters are set in nswl::params. Have
 # a look at the corresponding <tt>params.pp</tt> manifest file if you need more
@@ -104,18 +80,14 @@
 #
 # === Authors
 #
-# * Richard Pijnenburg <mailto:richard@ispavailability.com>
+# * Stas Alekseev <mailto:stas.alekseev@gnail.com>
 #
 class nswl(
   $ensure        = $nswl::params::ensure,
   $autoupgrade   = $nswl::params::autoupgrade,
   $status        = $nswl::params::status,
   $version       = false,
-  $format        = 'json',
-  $respawn_delay = 3,
-  $max_failure   = 7,
   $hostname      = $::fqdn,
-  $transport     = 'redis'
 ) inherits nswl::params {
 
   #### Validate parameters
@@ -133,23 +105,7 @@ class nswl(
     fail("\"${status}\" is not a valid status parameter value")
   }
 
-  if ! ($format in [ 'json', 'msgpack', 'string', 'raw' ]) {
-    fail("\"${format}\" is not a valid format parameter value")
-  }
-
-  if ! is_numeric($respawn_delay) {
-    fail("\"${respawn_delay}\" is not a valid respawn_delay parameter value")
-  }
-
-  if ! is_numeric($max_failure) {
-    fail("\"${max_failure}\" is not a valid max_failure parameter value")
-  }
-
   validate_string($hostname)
-
-  if ! ($transport in [ 'redis', 'rabbitmq', 'zmq', 'udp', 'mqtt', 'sqs' ]) {
-    fail("\"${transport}\" is not a valid transport parameter value")
-  }
 
   $config = "hostname: ${hostname}\nformat: ${format}\nrespawn_delay: ${respawn_delay}\nmax_failure: ${max_failure}\ntransport: ${transport}"
 

@@ -1,1 +1,1 @@
-NSWL_CONFIG=/usr/local/netscaler/etc/nswl.conf
+NSWL_CONFIG=/etc/nswl/nswl.conf

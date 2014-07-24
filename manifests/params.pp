@@ -25,7 +25,7 @@
 #
 # === Authors
 #
-# * Richard Pijnenburg <mailto:richard@ispavailability.com>
+# * Stas Alekseev <mailto:stas.alekseev@gnail.com>
 #
 class nswl::params {
 
@@ -43,30 +43,20 @@ class nswl::params {
   #### Internal module values
 
   # packages
-  case $::operatingsystem {
-    'CentOS', 'Fedora', 'Scientific', 'RedHat', 'Amazon': {
+  case $::osfamily {
+    'RedHat': {
       # main application
-      $package = [ 'nswl' ]
-    }
-    'Debian', 'Ubuntu': {
-      # main application
-      $package = [ 'nswl' ]
+      $package = [ 'NSweblog' ]
     }
     default: {
       fail("\"${module_name}\" provides no package default value
-            for \"${::operatingsystem}\"")
+            for \"${::osfamily}\"")
     }
   }
 
   # service parameters
-  case $::operatingsystem {
-    'CentOS', 'Fedora', 'Scientific', 'RedHat', 'Amazon': {
-      $service_name       = 'nswl'
-      $service_hasrestart = true
-      $service_hasstatus  = true
-      $service_pattern    = $service_name
-    }
-    'Debian', 'Ubuntu': {
+  case $::osfamily {
+    'RedHat': {
       $service_name       = 'nswl'
       $service_hasrestart = true
       $service_hasstatus  = true
@@ -74,7 +64,7 @@ class nswl::params {
     }
     default: {
       fail("\"${module_name}\" provides no service parameters
-            for \"${::operatingsystem}\"")
+            for \"${::osfamily}\"")
     }
   }
 

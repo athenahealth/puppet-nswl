@@ -20,7 +20,7 @@
 #
 # === Authors
 #
-# * Richard Pijnenburg <mailto:richard@ispavailability.com>
+# * Stas Alekseev <mailto:stas.alekseev@gnail.com>
 #
 class nswl::config {
 
@@ -33,13 +33,16 @@ class nswl::config {
     mode   => '0644'
   }
 
-  file_fragment { 'header':
-    tag     => "nswl_config_${::fqdn}",
-    content => "[nswl]\n${nswl::config}\n",
-    order   => 10
+  # Sysconfig
+  file { '/etc/sysconfig/nswl':
+    ensure => present,
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0644',
+    source => "puppet:///modules/${module_name}/etc/sysconfig/nswl"
   }
 
-  file_concat { '/etc/nswl/nswl.conf':
+  file { '/etc/nswl/nswl.conf':
     tag     => "nswl_config_${::fqdn}",
     owner   => 'root',
     group   => 'root',
