@@ -1,5 +1,5 @@
 name    'salekseev-nswl'
-version '0.0.1'
+version '0.1.0'
 source 'https://github.com/salekseev/puppet-nswl'
 author 'salekseev'
 license 'Apache License, Version 2.0'
