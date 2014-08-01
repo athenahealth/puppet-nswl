@@ -80,7 +80,7 @@
 #
 # === Authors
 #
-# * Stas Alekseev <mailto:stas.alekseev@gnail.com>
+# * Stas Alekseev <mailto:me@salekseev.com>
 #
 class nswl(
   $ensure        = $nswl::params::ensure,

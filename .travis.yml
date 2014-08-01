@@ -17,4 +17,4 @@ matrix:
 gemfile: .gemfile
 notifications:
   email:
-    - stas.alekseev@gmail.com
+    - me@salekseev.com
