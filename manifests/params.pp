@@ -25,7 +25,7 @@
 #
 # === Authors
 #
-# * Stas Alekseev <mailto:stas.alekseev@gnail.com>
+# * Stas Alekseev <mailto:me@salekseev.com>
 #
 class nswl::params {
 
@@ -39,6 +39,10 @@ class nswl::params {
 
   # service status
   $status = 'enabled'
+
+  # User and Group for the files and user to run the service as.
+  $nswl_user  = 'root'
+  $nswl_group = 'root'
 
   #### Internal module values
 
