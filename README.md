@@ -7,17 +7,17 @@ A puppet module for managing and configuring NSweblog
 Installation, make sure service is running and will be started at boot
 time:
 
-     class { 'beaver': }
+     class { 'nswl': }
 
 Removal/decommissioning:
 
-     class { 'beaver':
+     class { 'nswl':
        ensure => 'absent',
      }
 
 Install everything but disable service(s) afterwards:
 
-     class { 'beaver':
+     class { 'nswl':
        status => 'disabled',
      }
 
