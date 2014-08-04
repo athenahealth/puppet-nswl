@@ -9,15 +9,15 @@ describe 'nswl', :type => 'class' do
     } end
 
     # init.pp
-    it { should contain_class('beaver::package') }
-    it { should contain_class('beaver::config') }
-    it { should contain_class('beaver::service') }
+    it { should contain_class('nswl::package') }
+    it { should contain_class('nswl::config') }
+    it { should contain_class('nswl::service') }
 
     # package.pp
-    it { should contain_package('beaver') }
+    it { should contain_package('nswl') }
 
     # service.pp
-    it { should contain_service('beaver') }
+    it { should contain_service('nswl') }
 
     # config.pp
 
